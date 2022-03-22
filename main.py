@@ -168,3 +168,21 @@ def test_parens_match_dc():
     assert parens_match_dc(['(', ')']) == True
     assert parens_match_dc(['(']) == False
     assert parens_match_dc([')']) == False
+
+def iterate(f, x, a):
+    # done. do not change me.
+    if len(a) == 0:
+        return x
+    else:
+        return iterate(f, f(x, a[0]), a[1:])
+def reduce(f, id_, a):
+    # done. do not change me.
+    if len(a) == 0:
+        return id_
+    elif len(a) == 1:
+        return a[0]
+    else:
+        # can call these in parallel
+        res = f(reduce(f, id_, a[:len(a)//2]),
+                 reduce(f, id_, a[len(a)//2:]))
+        return res

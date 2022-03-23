@@ -194,15 +194,12 @@ def parens_match_dc_helper(mylist):
         return (0,0)
     L = parens_match_dc_helper(mylist[0:len(mylist)//2])
     R = parens_match_dc_helper(mylist[len(mylist)//2:])
-    L0 = L[0]
-    L1 = 0
+    newL, newR = 0, 0
     if L[1]>R[0]:
-        L1 = L[1]-R[0]
-    R0 = 0
+        newL = L[1]-R[0]
     if R[0]>L[1]:
-        R0 = R[0] - L[1]
-    R1 = R[1]
-    return (L0+R0,L1+R1)
+        newR = R[0] - L[1]
+    return (L[0]+newR, newL+R[1])
         
     
 

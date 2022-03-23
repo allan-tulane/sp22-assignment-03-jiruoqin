@@ -24,4 +24,4 @@ Place all written answers from `assignment-03.md` here for easier grading.
 
 
 - **f.**
-**Answer:** Since solving subproblem takes constant work, then the work is $W(n)=2W(\frac{n}{2})+O(n) \in O(n\log n)$ and its span is $S(n) = S(\frac{n}{2})+O(1) \in O(\log n)$.
+**Answer:** Since the merging step takes constant work, then the total work is $W(n)=2W(\frac{n}{2})+O(1) \in O(n)$ and its span is $S(n) = S(\frac{n}{2})+O(1) \in O(\log n)$.

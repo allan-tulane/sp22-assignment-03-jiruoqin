@@ -192,14 +192,12 @@ def parens_match_dc_helper(mylist):
         else:
             pass
         return (0,0)
-    L = parens_match_dc_helper(mylist[0:len(mylist)//2])
-    R = parens_match_dc_helper(mylist[len(mylist)//2:])
-    newL, newR = 0, 0
-    if L[1]>R[0]:
-        newL = L[1]-R[0]
-    if R[0]>L[1]:
-        newR = R[0] - L[1]
-    return (L[0]+newR, newL+R[1])
+
+    LL, LR = parens_match_dc_helper(mylist[0:len(mylist)//2])
+    RL, RR = parens_match_dc_helper(mylist[len(mylist)//2:])
+    # LL stands for first elemnt, and LR stands for second element in left tuple.
+    # Same for RL and RR.
+    return (LR - RL, LL - RR)
         
     
 

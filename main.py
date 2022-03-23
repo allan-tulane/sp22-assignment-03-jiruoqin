@@ -1,6 +1,7 @@
 # assignment-03
 
 # no other imports needed
+from cmath import inf
 from collections import defaultdict
 import math
 
@@ -43,8 +44,8 @@ def parens_match_iterative(mylist):
     False
     """
     ### TODO
-    pass
-
+    result = iterate(parens_update, 0, mylist)
+    return result == 0 
 
 def parens_update(current_output, next_input):
     """
@@ -59,13 +60,22 @@ def parens_update(current_output, next_input):
       the updated value of `current_output`
     """
     ###TODO
-    pass
+    if next_input in ["("]:
+        return current_output + 1
+    elif next_input in [")"]:
+        if current_output > 0:
+            return current_output - 1
+        else:
+            return -inf
+    else:
+        pass 
 
 
 def test_parens_match_iterative():
     assert parens_match_iterative(['(', ')']) == True
     assert parens_match_iterative(['(']) == False
     assert parens_match_iterative([')']) == False
+    assert parens_match_iterative([')', '(']) == False
 
 
 #### Scan solution
@@ -88,7 +98,10 @@ def parens_match_scan(mylist):
     
     """
     ###TODO
-    pass
+    newList = list(map(paren_map, mylist))
+    result = scan(plus, 0, newList)
+    #result = scan(plus, 0, list(map(paren_map, mylist)))
+    return result[1] == 0
 
 def scan(f, id_, a):
     """
@@ -132,6 +145,9 @@ def min_f(x,y):
         return x
     return y
 
+def plus(x,y):
+    return x+y
+
 def test_parens_match_scan():
     assert parens_match_scan(['(', ')']) == True
     assert parens_match_scan(['(']) == False
@@ -161,28 +177,15 @@ def parens_match_dc_helper(mylist):
       parens_match_dc to return the final True or False value
     """
     ###TODO
-    pass
+    if len(mylist)==0:
+        return [], 0
+    elif len(mylist)==1:
+        return [0], mylist[0]
+    else:
+        
     
 
 def test_parens_match_dc():
     assert parens_match_dc(['(', ')']) == True
     assert parens_match_dc(['(']) == False
     assert parens_match_dc([')']) == False
-
-def iterate(f, x, a):
-    # done. do not change me.
-    if len(a) == 0:
-        return x
-    else:
-        return iterate(f, f(x, a[0]), a[1:])
-def reduce(f, id_, a):
-    # done. do not change me.
-    if len(a) == 0:
-        return id_
-    elif len(a) == 1:
-        return a[0]
-    else:
-        # can call these in parallel
-        res = f(reduce(f, id_, a[:len(a)//2]),
-                 reduce(f, id_, a[len(a)//2:]))
-        return res
